@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<title>Layout</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+					<a data-target=".navbar-responsive-collapse" data-toggle="collapse"
+						class="btn btn-navbar"><span class="icon-bar"> </span><span
+						class="icon-bar"></span><span class="icon-bar"></span></a> <a href="#"
+						class="brand">股票模拟交易系统</a>
+
+					<div class="nav-collapse collapse navbar-responsive-collapse">
+						<ul class="nav">
+							<li class="active"><a href="/stock/SearchView">行情</a></li>
+							<li class="dropdown"><a data-toggle="dropdown"
+								class="dropdown-toggle" href="#"><strong class="caret">交易</strong></a>
+								<ul class="dropdown-menu">
+									<li><a href="/trade/BuyView">买入</a></li>
+									<li><a href="/trade/SellView">卖出</a></li>
+								</ul></li>
+							<li><a href="/trade/CancelView">撤单(未成交订单)</a></li>
+							<li><a href="/trade/TransactionView">成交</a></li>
+							<li><a href="/trade/HoldView">持仓</a></li>
+
+							<li class="dropdown"><a data-toggle="dropdown"
+								class="dropdown-toggle" href="/holder/InfoView"><strong
+									class="caret">账户信息</strong></a>
+								<ul class="dropdown-menu">
+									<li><a href="/holder/BalanceView">余额</a></li>
+									<li><a href="/holder/logout">退出</a></li>
+								</ul></li>
+						</ul>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<h1 layout:fragment="header">Layout</h1>
+		<div layout:fragment="content">Fake content</div>
+	</div>
+</body>
+</html>
