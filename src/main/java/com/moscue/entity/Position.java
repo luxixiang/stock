@@ -30,15 +30,7 @@ public class Position {
 	private Double profitAndLossRate;
 	private Date exitTime;
 	private Date addTime;
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "holder_id",referencedColumnName="id", unique = true)
-	private StockHolder stockHolder;
-	public StockHolder getStockHolder() {
-		return stockHolder;
-	}
-	public void setStockHolder(StockHolder stockHolder) {
-		this.stockHolder = stockHolder;
-	}
+    private long holderId;
 	public String getCode() {
 		return code;
 	}
@@ -110,5 +102,11 @@ public class Position {
 	}
 	public void setExitTime(Date exitTime) {
 		this.exitTime = exitTime;
+	}
+	public long getHolderId() {
+		return holderId;
+	}
+	public void setHolderId(long holderId) {
+		this.holderId = holderId;
 	}
 }

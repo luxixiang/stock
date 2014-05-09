@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="main_layout">
+<head>
+<title>交易</title>
+</head>
+<body>
+	<h1 layout:fragment="header">成交</h1>
+	<div layout:fragment="content" class="container">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<td>委托代码</td>
+					<td>股票名称</td>
+					<td>股票代码</td>
+					<td>股票价格</td>
+					<td>当前价格</td>
+					<td>总数</td>
+					<td>总额</td>
+					<td>买/卖</td>
+					<td>交易状态</td>
+					<td>账户变动</td>
+					<td>时间</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${trades.isEmpty()}">
+					<td colspan="3">没有结果</td>
+				</tr>
+				<tr th:each="trade : ${trades}">
+					<td th:text="${trade.agencyCode}">1</td>
+					<td th:text="${trade.name}">1</td>
+					<td th:text="${trade.code}">1</td>
+					<td th:text="${trade.price}">1</td>
+					<td th:text="${trade.currentPrice}">1</td>
+					<td th:text="${trade.count}">1</td>
+					<td th:text="${trade.amount}">1</td>
+					<td th:switch="${trade.buyOrSell}">
+						<span th:case="1">买</span>
+						<span th:case="2">卖</span>
+					</td>
+					<td th:switch="${trade.status}">
+						<span th:case="1">成交</span>
+					</td>
+					<td th:text="${trade.profitAndLoss}"></td>
+					<td th:text="${#calendars.format(trade.tradeTime)}">July 11,
+						2012 2:17:16 PM CDT</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

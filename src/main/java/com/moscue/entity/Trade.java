@@ -27,18 +27,16 @@ public class Trade {
 	private Double price;
 	private Double currentPrice;
 	private Double amount;//总金额
+	private Double profitAndLoss;
 	private String tradeCode;//交易代码
 	private String agencyCode;//委托代码
 	private Date tradeTime;//交易时间
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "holder_id",referencedColumnName="id", unique = true)
-	private StockHolder stockHolder;
-	public StockHolder getStockHolder() {
-		return stockHolder;
-	}
-	public void setStockHolder(StockHolder stockHolder) {
-		this.stockHolder = stockHolder;
-	}
+	
+	private Integer status;//交易状态1:正常；2：删除
+	//@ManyToOne(cascade = CascadeType.ALL, optional = false)
+    //@JoinColumn(name = "holder_id",referencedColumnName="id", unique = false)
+	private long holderId;
+	
 	public String getCode() {
 		return code;
 	}
@@ -106,6 +104,24 @@ public class Trade {
 	}
 	public void setBuyOrSell(int buyOrSell) {
 		this.buyOrSell = buyOrSell;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public long getHolderId() {
+		return holderId;
+	}
+	public void setHolderId(long holderId) {
+		this.holderId = holderId;
+	}
+	public Double getProfitAndLoss() {
+		return profitAndLoss;
+	}
+	public void setProfitAndLoss(Double profitAndLoss) {
+		this.profitAndLoss = profitAndLoss;
 	}
 	
 }

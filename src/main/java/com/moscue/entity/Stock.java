@@ -1,11 +1,14 @@
 package com.moscue.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.moscue.utils.DateUtils;
 
 /**
  * Created by Aaron on 14-3-29.
@@ -49,6 +52,7 @@ public class Stock implements Serializable{
     private double sell5Price;//卖五报价（元）
     private String date;//2013-12-18 日期
     private String time;//13:56:49,00 时间
+    private Date dateTime;
 
     public String getName() {
         return name;
@@ -312,6 +316,16 @@ public class Stock implements Serializable{
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+	
+	public Date getDateTime(){
+		this.dateTime = DateUtils.getDateFromStr(this.getDate() + " " + this.getTime());
+		return this.dateTime;
+	}
+
+	public void setDateTime(Date dateTime) {
+		
+		this.dateTime = dateTime;
 	}
 
 }

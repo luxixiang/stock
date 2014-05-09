@@ -21,20 +21,9 @@ public class Balance {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private Double remain;
-	
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "holder_id",referencedColumnName="id", unique = true)
-	private StockHolder stockHolder;
+	private long holderId;
 	private Date updateTime;
 	private Date addTime;
-	
-	public StockHolder getStockHolder() {
-		return stockHolder;
-	}
-
-	public void setStockHolder(StockHolder stockHolder) {
-		this.stockHolder = stockHolder;
-	}
 
 	public Long getId() {
 		return id;
@@ -66,5 +55,13 @@ public class Balance {
 
 	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
+	}
+
+	public long getHolderId() {
+		return holderId;
+	}
+
+	public void setHolderId(long holderId) {
+		this.holderId = holderId;
 	}
 }

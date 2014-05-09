@@ -1,0 +1,54 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="main_layout">
+<head>
+<title>撤单</title>
+<style type="text/css">
+.dlStyle {
+	text-indent: 20px;
+}
+</style>
+</head>
+<body>
+	<h1 layout:fragment="header">撤单</h1>
+	<div layout:fragment="content" class="container">
+		<div class="alert alert-success" th:if="${globalMessage}"
+			th:text="${globalMessage}">成功</div>
+		<form id="buyForm" th:action="@{/trade/CancelOrder}" method="post">
+			<div class="well">
+				<dl>
+					<dt>股票代码</dt>
+					<dd class="dlStyle" id="code" th:text="${stockOrder.code}">123</dd>
+					<dt>委托交易时间</dt>
+					<dd class="dlStyle" id="agenceTime"
+						th:text="${stockOrder.agencyTime}? ${#calendars.format(stockOrder.agencyTime)}">
+						July 11, 2012 2:17:16 PM CDT</dd>
+					<dt>委托价格</dt>
+					<dd class="dlStyle" id="price" th:text="${stockOrder.agencyPrice}"></dd>
+					<dt>委托数量</dt>
+					<dd class="dlStyle" id="text" th:text="${stockOrder.count}"></dd>
+					<dd>
+						<input type="hidden" name="agencyCode"
+							th:value="${stockOrder.agencyCode}" />
+					</dd>
+					<dt>交易状态</dt>
+					<dd class="dlStyle" id="text" th:switch="${stockOrder.status}">
+						<span th:case="1">已下单</span> <span th:case="2">交易完成</span> <span
+							th:case="3">已取消</span>
+					</dd>
+				</dl>
+				<dl th:if="${stockOrder.status==2}">
+				
+					<dt>交易总额</dt>
+					<dd class="dlStyle" id="text" th:text="${stockOrder.tradeCount}"></dd>
+					<dt>交易价格</dt>
+					<dd class="dlStyle" id="text" th:text="${stockOrder.tradePrice}"></dd>
+
+				</dl>
+				<input type="button" id="btnBuy" value="返回" /><input type="submit"
+					value="取消订单" />
+			</div>
+		</form>
+	</div>
+</body>
+</html>

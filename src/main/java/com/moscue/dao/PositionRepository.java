@@ -8,4 +8,8 @@ import com.moscue.entity.Position;
 
 public interface PositionRepository extends CrudRepository<Position, Long> {
 	List<Position> findByCode(String code);
+	
+	Position findByHolderIdAndCode(long holderId, String code);
+	
+	List<Position> findByHolderId(long holderId);
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="main_layout">
+<head>
+<title>订单列表</title>
+</head>
+<body>
+	<h1 layout:fragment="header">订单列表</h1>
+	<div layout:fragment="content" class="container">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<td>委托代码</td>
+					<td>代码</td>
+					<td>股票名称</td>
+					<td>委托价格</td>
+					<td>委托数量</td>
+					<td>委托类型</td>
+					<td>买/卖</td>
+					<td>订单状态</td>
+					<td>交易价格</td>
+					<td>交易总额</td>
+					<td>委托时间</td>
+					<td>取消</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${stockOrders}?${stockOrders.isEmpty()}">
+					<td colspan="3">没有订单</td>
+				</tr>
+				<tr th:each="order : ${stockOrders}">
+					<td th:text="${order.agencyCode}">1</td>
+					<td th:text="${order.code}">1</td>
+					<td th:text="${order.name}">1</td>
+					<td th:text="${order.agencyPrice}">1</td>
+					<td th:text="${order.count}">1</td>
+					<td th:if="${order.agencyType==1}">全额成交或撤销委托</td>
+					<td th:switch="${order.buyOrSell}">
+						<span th:case="1">买</span>
+						<span th:case="2">卖</span>
+					</td>
+					<th th:switch="${order.status}">
+						<span th:case="1">已下单</span>
+						<span th:case="2">交易完成</span>
+						<span th:case="3">已取消</span>
+					</th>
+					<td th:text="${order.tradePrice}">1</td>
+					<td th:text="${order.tradeCount}">1</td>
+					<td th:text="${order.agencyTime}?${#calendars.format(order.agencyTime)}">July 11,
+						2012 2:17:16 PM CDT</td>
+					<td><a th:href='@{/trade/OrderDetail?(agencyCode=${order.agencyCode})}'>取消订单</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

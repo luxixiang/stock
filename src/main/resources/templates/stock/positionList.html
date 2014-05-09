@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="main_layout">
+<head>
+<title>持仓</title>
+</head>
+<body>
+	<h1 layout:fragment="header">持仓</h1>
+	<div layout:fragment="content" class="container">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<td>股票名称</td>
+					<td>股票代码</td>
+					<td>持股总数</td>
+					<td>市值</td>
+					<td>均价</td>
+					<td>当前价格</td>
+					<td>操作</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${positions.isEmpty()}">
+					<td colspan="3">没有数据</td>
+				</tr>
+				<tr th:each="position : ${positions}">
+					<td th:text="${position.name}">1</td>
+					<td th:text="${position.code}">1</td>
+					<td th:text="${position.count}">1</td>
+					<td th:text="${position.marketValue}">1</td>
+					<td th:text="${position.costPrice}">1</td>
+					<td th:text="${position.currentPrice}">1</td>
+					<td><a th:href='@{/trade/SellView?(code=${position.code})}'>卖出</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

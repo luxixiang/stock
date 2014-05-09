@@ -9,8 +9,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.moscue.dao.StockMetaRepository;
 import com.moscue.dao.StockRepository;
 import com.moscue.entity.Stock;
+import com.moscue.entity.StockMeta;
 import com.moscue.fetcher.FetcherConfig;
 import com.moscue.fetcher.PageFetcher;
 import com.moscue.parser.StockDataParser;
@@ -24,6 +26,9 @@ import com.moscue.utils.CharsetUtils;
 public class StockService {
 	@Autowired
 	StockRepository stockRepository;
+	
+	@Autowired
+	StockMetaRepository stockMetaRepository;
 	
     PageFetcher fetcher = new PageFetcher(new FetcherConfig());
 	
@@ -57,6 +62,15 @@ public class StockService {
 		stockIds.add(stockId);
 		Map<String, Stock> map = getStockInfo(stockIds);
 		return map.get(stockId);
+	}
+
+	public List<Stock> getHistStock(String code) {
+		List<Stock> list = stockRepository.findByCode(code);
+		return list == null? new ArrayList<Stock>() : list;
+	}
+	
+	public List<StockMeta> getAllStockMeta() {
+		return (List<StockMeta>) stockMetaRepository.findAll();
 	}
 	
 }

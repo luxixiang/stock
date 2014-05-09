@@ -27,18 +27,21 @@ public class StockOrder {
 	private String agencyCode;//委托编号
 	private Double agencyPrice;
 	private Double tradePrice;
-	private Double tradeCount;
-	private Double agencyType;
+	private Integer tradeCount;
+	private int agencyType;
 	private Date addTime;
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "holder_id",referencedColumnName="id", unique = true)
-	private StockHolder stockHolder;
-	public StockHolder getStockHolder() {
-		return stockHolder;
+	private int status;
+	//@ManyToOne(cascade = CascadeType.ALL, optional = false)//持久化层有缺陷
+    //@JoinColumn(name = "holder_id",referencedColumnName="id", unique = true)
+	private long holderId;
+	
+	public Long getId() {
+		return id;
 	}
-	public void setStockHolder(StockHolder stockHolder) {
-		this.stockHolder = stockHolder;
+	public void setId(Long id) {
+		this.id = id;
 	}
+	
 	public String getCode() {
 		return code;
 	}
@@ -56,12 +59,6 @@ public class StockOrder {
 	}
 	public void setCount(Integer count) {
 		this.count = count;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 	public Date getAddTime() {
 		return addTime;
@@ -99,16 +96,29 @@ public class StockOrder {
 	public void setTradePrice(Double tradePrice) {
 		this.tradePrice = tradePrice;
 	}
-	public Double getTradeCount() {
-		return tradeCount;
-	}
-	public void setTradeCount(Double tradeCount) {
-		this.tradeCount = tradeCount;
-	}
-	public Double getAgencyType() {
+
+	public int getAgencyType() {
 		return agencyType;
 	}
-	public void setAgencyType(Double agencyType) {
+	public void setAgencyType(int agencyType) {
 		this.agencyType = agencyType;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public long getHolderId() {
+		return holderId;
+	}
+	public void setHolderId(long holderId) {
+		this.holderId = holderId;
+	}
+	public Integer getTradeCount() {
+		return tradeCount;
+	}
+	public void setTradeCount(Integer tradeCount) {
+		this.tradeCount = tradeCount;
 	}
 }

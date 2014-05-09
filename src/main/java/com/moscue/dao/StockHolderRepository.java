@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.moscue.entity.StockHolder;
 
 public interface StockHolderRepository extends CrudRepository<StockHolder, Long> {
-	List<StockHolder> findByCode(String code);
+	StockHolder findByCode(String code);
 }
